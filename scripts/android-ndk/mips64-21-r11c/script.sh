@@ -30,7 +30,6 @@ function mason_compile {
 
     ${MASON_BUILD_PATH}/build/tools/make-standalone-toolchain.sh \
           --toolchain="mips64el-linux-android-clang" \
-          --use-llvm \
           --package-dir="${MASON_BUILD_PATH}/package-dir/" \
           --install-dir="${MASON_PREFIX}" \
           --stl="libcxx" \

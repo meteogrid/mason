@@ -24,8 +24,11 @@ function mason_compile {
     ln -s ${MASON_DIR} .mason
 
     # build
-    INSTALL_PREFIX=${MASON_PREFIX} ./configure
-    CXXFLAGS="-fPIC ${CFLAGS:-} ${CXXFLAGS:-}" make install
+    if [[ ${MASON_PLATFORM:-} == 'android' ]] ; then
+        export GYP_FLAVOR_SUFFIX=-android
+    fi
+    INSTALL_PREFIX=${MASON_PREFIX} VERBOSE=1 ./configure
+    CXXFLAGS="-fPIC ${CFLAGS:-} ${CXXFLAGS:-}" make install -j${MASON_CONCURRENCY}
 }
 
 function mason_cflags {
